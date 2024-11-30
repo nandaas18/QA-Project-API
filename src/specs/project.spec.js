@@ -1,4 +1,3 @@
-import { login } from "../apis/project.api.js";
 import {
   getPcaItem,
   getPcaItemById,
@@ -24,12 +23,6 @@ import {
   project_all_schema,
   project_single_schema,
 } from "../schemas/project.schema.js";
-
-before(async function () {
-  // Lakukan login untuk mendapatkan token
-  this.timeout(15000);
-  await login(); // Fungsi login akan diambil dari api.js
-});
 
 describe("/project/pac - Project Costing API-", function () {
   it("check status code - /pca", async function () {

@@ -1,94 +1,206 @@
-import axios from "axios";
 import axiosInstance from "../libs/axiosInstance.js";
+import { authLogin } from "./auth.api.js";
 
-let authToken = null;
+export async function getProject(size, number) {
+  const auth = await authLogin();
 
-// Fungsi untuk login dan menyimpan token
-export async function login() {
-  const loginData = {
-    username: "dummy@prosigmaka.com",
-    password: "dummypsm",
-  };
+  const access_token = await auth.data.access_token;
 
-  try {
-    const loginResponse = await axios.post(
-      "https://siska.nunukan.pass-pdam.com/auth/auth/login",
-      loginData
-    );
-    authToken = loginResponse.data.token; // Ambil token dari response
-    console.log("Login berhasil, token:", authToken);
+  const res = await axiosInstance.get(`/project/pca/${size}/${number}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
 
-    // Setelah login berhasil, set token di axiosInstance
-    axiosInstance.defaults.headers["Authorization"] = `Bearer ${authToken}`;
-
-    return loginResponse; // Mengembalikan response login
-  } catch (error) {
-    console.error("Login gagal:", error);
-    throw error;
-  }
+  return res;
 }
 
-// Fungsi untuk mendapatkan token jika diperlukan
-export function getAuthToken() {
-  return authToken;
-}
+export async function getProjectAllPending(creator, size, number) {
+  const auth = await authLogin();
 
-export function getProject(size, number) {
-  return axiosInstance.get("/project/pca/" + size + number);
-}
+  const access_token = await auth.data.access_token;
 
-export function getProjectAllPending(creator, size, number) {
-  return axiosInstance.get(
-    "/project/pca/allpending/" + creator + size + number
+  const res = await axiosInstance.get(
+    `/project/pca/allpending/${creator}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getProjectId(id) {
-  return axiosInstance.get("/project/pca/" + id);
+export async function getProjectId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/project/pca/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getPcaItem(id, size, number) {
-  return axiosInstance.get("/project/pcaitem/" + id + size + number);
-}
+export async function getPcaItem(id, size, number) {
+  const auth = await authLogin();
 
-export function getPcaItemById(projectCostingId, itemNumber) {
-  return axiosInstance.get(
-    "/project/pcaitem/byid/" + projectCostingId + itemNumber
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/project/pcaitem/${id}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getPcaItemByIdPcid(projectCostingId, size, number) {
-  return axiosInstance.get(
-    "/project/pcaitem/byidpcid/" + projectCostingId + size + number
+export async function getPcaItemById(projectCostingId, itemNumber) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/project/pcaitem/byid/${projectCostingId}/${itemNumber}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getPcaSubItem(projectCostingId, itemNumber, subItemName) {
-  return axiosInstance.get(
-    "/project/pcasubitem/" + projectCostingId + itemNumber + subItemName
+export async function getPcaItemByIdPcid(projectCostingId, size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/project/pcaitem/byidpcid/${projectCostingId}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getPcaSubItemAll(projectCostingId, size, number) {
-  return axiosInstance.get(
-    "/project/pcasubitem/all" + projectCostingId + size + number
+export async function getPcaSubItem(projectCostingId, itemNumber, subItemName) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/project/pcasubitem/${projectCostingId}/${itemNumber}/${subItemName}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getPcaSubItemId(id) {
-  return axiosInstance.get("/project/pcasubitem/" + id);
-}
+export async function getPcaSubItemAll(projectCostingId, size, number) {
+  const auth = await authLogin();
 
-export function getPcaSubItemSizeNumber(size, number) {
-  return axiosInstance.get("/project/pcasubitem/" + size + number);
-}
+  const access_token = await auth.data.access_token;
 
-export function getPcaSupport(size, number) {
-  return axiosInstance.get("/project/pca-supportdoc" + id + size + number);
-}
-
-export function getPcaSupportGet(tenantId, attachmentId) {
-  return axiosInstance.get(
-    "/project/pca-supportdoc/get/" + tenantId + attachmentId
+  const res = await axiosInstance.get(
+    `/project/pcasubitem/all/${projectCostingId}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
+}
+
+export async function getPcaSubItemId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/project/pcasubitem/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
+}
+
+export async function getPcaSubItemSizeNumber(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/project/pcasubitem/${size}/${number}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
+}
+
+export async function getPcaSupport(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/project/pca-supportdoc/${id}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+
+  return res;
+}
+
+export async function getPcaSupportGet(tenantId, attachmentId) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/project/pca-supportdoc/get/${tenantId}/${attachmentId}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+
+  return res;
 }

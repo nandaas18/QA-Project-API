@@ -10,6 +10,6 @@ const jsonSchemaFormat = chaiJsonSchemaAjv.create({
   ajv: ajvInstance,
 });
 
-use(chaiJsonSchemaAjv);
+use(jsonSchemaFormat);
 
 export default expect;

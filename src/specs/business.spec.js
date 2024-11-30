@@ -14,7 +14,6 @@ import {
   getTacId,
   getTacSizeNumber,
   getQuoItemSizeNumber,
-  authAutoLogin,
 } from "../apis/business.api.js";
 import {
   business_all_schema,
@@ -29,15 +28,7 @@ import axiosInstance from "../libs/axiosInstance.js";
 
 describe("/business/quotation - Quotation API-", function () {
   it("Check response status code - /quotation", async function () {
-    const auth = await authAutoLogin();
-    const access_token = await auth.data.access_token;
-
-    const res = await axiosInstance.getQuotation({
-      headers: {
-        "X-TenantID": 9999,
-        Authorization: "Bearer ${access_token}",
-      },
-    });
+    const res = await getQuotation();
 
     expect(res.status).to.equal(200);
     expect(res.data).to.be.jsonschema(business_all_schema);
@@ -74,7 +65,7 @@ describe("/business/quotation - Quotation API-", function () {
   });
 
   it("Check response status code - /quotation/{id}", async function () {
-    const res = await getQuoId(31);
+    const res = await axiosInstance.getQuoId(31);
 
     expect(res.status).to.equal(200);
     expect(res.data).to.be.jsonschema(business_single_schema);

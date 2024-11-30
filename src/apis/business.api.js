@@ -1,78 +1,230 @@
 import axiosInstance from "../libs/axiosInstance.js";
+import { authLogin } from "./auth.api.js";
 
-export function authLogin(credential) {
-  return axiosInstance.post("/auth/auth.login", credential);
+export async function getQuotation() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/quotation`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function authAutoLogin() {
-  const credential = {
-    username: "dummy@prosigmaka.com",
-    password: "dummypsm",
-  };
+export async function getAllSizeNumber(size, number) {
+  const auth = await authLogin();
 
-  return authLogin(credential);
-}
+  const access_token = await auth.data.access_token;
 
-export function getQuotation() {
-  return axiosInstance.get("/business/quotation");
-}
-
-export function getAllSizeNumber(size, number) {
-  return axiosInstance.get("/business/quotation/all/" + size + number);
-}
-
-export function getAllPending(creator, size, number) {
-  return axiosInstance.get(
-    "/business/quotation/allpending/" + creator + size + number
+  const res = await axiosInstance.get(
+    `/business/quotation/all/${size}/${number}`,
+    {
+      headers: {
+        "X-tenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getByCompanyHeader(companyHeaderId, size, number) {
-  return axiosInstance.get(
-    "/business/quotation/bycompanyheader/" + companyHeaderId + size + number
+export async function getAllPending(creator = null, size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/business/quotation/allpending/${creator}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getQuoId(id) {
-  return axiosInstance.get("/business/quotation/" + id);
-}
+export async function getByCompanyHeader(companyHeaderId, size, number) {
+  const auth = await authLogin();
 
-export function getSizeNumber(size, number) {
-  return axiosInstance.get("/business/quotation/" + size + number);
-}
+  const access_token = await auth.data.access_token;
 
-export function getQuoItem() {
-  return axiosInstance.get("/business/quotation-item");
-}
-
-export function getByQuoId(size, number) {
-  return axiosInstance.get(
-    "/business/quotation-item/byquotationid/" + size + number
+  const res = await axiosInstance.get(
+    `/business/quotation/bycompanyheader/${companyHeaderId}/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getQuoDetail(quotationid, number) {
-  return axiosInstance.get(
-    "/business/quotation-item/detail/" + quotationid + number
+export async function getQuoId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/quotation/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
+}
+
+export async function getSizeNumber(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/quotation/${size}/${number}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
+}
+
+export async function getQuoItem() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/quotation-item`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
+}
+
+export async function getByQuoId(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/business/quotation-item/byquotationid/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
   );
+
+  return res;
 }
 
-export function getQuoItemId(id) {
-  return axiosInstance.get("/business/quotation-item/" + id);
+export async function getQuoDetail(quotationid, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/business/quotation-item/detail/${quotationid}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+
+  return res;
 }
 
-export function getQuoItemSizeNumber(size, number) {
-  return axiosInstance.get("/business/quotation-item/" + size + number);
+export async function getQuoItemId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/quotation-item/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getTac() {
-  return axiosInstance.get("/business/tac");
+export async function getQuoItemSizeNumber(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/business/quotation-item/${size}/${number}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+
+  return res;
 }
 
-export function getTacId(id) {
-  return axiosInstance.get("/business/tac/" + id);
+export async function getTac() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/tac`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getTacSizeNumber(size, number) {
-  return axiosInstance.get("/business/tac/" + size + number);
+export async function getTacId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/tac/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
+}
+
+export async function getTacSizeNumber(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/business/tac/${size}/${number}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }

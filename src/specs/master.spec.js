@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import {
   getCompany,
   getCompanyD,
@@ -32,10 +31,11 @@ import {
   salgrade_single_schema,
   service_single_schema,
 } from "../schemas/master.schema.js";
+import axiosInstance from "../libs/axiosInstance.js";
 
 describe("/master/companycontact - Company Contact Resource", function () {
   it("check status code - /companycontact", async function () {
-    const res = await getCompany();
+    const res = await axiosInstance.getCompany();
 
     expect(res.status).to.equal(200);
     expect(res.data).to.be.jsonschema(company_all_schema);

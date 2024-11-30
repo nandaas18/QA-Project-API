@@ -1,69 +1,263 @@
 import axiosInstance from "../libs/axiosInstance.js";
+import { authLogin } from "./auth.api.js";
 
-export function getCompany() {
-  return axiosInstance.get("/master/companycontact");
+export async function getCompany() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/companycontact`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompanyId(id) {
-  return axiosInstance.get("/master/companycontact/" + id);
+export async function getCompanyId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/companycontact/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompanyD() {
-  return axiosInstance.get("/master/companyd");
+export async function getCompanyD() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/companyd`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompanyDId(id) {
-  return axiosInstance.get("/master/companyd/" + id);
+export async function getCompanyDId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/companyd/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompanyH() {
-  return axiosInstance.get("/master/companyh");
+export async function getCompanyH() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/companyh`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompanyHId(id) {
-  return axiosInstance.get("/master/companyh" + id);
+export async function getCompanyHId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/companyh/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getConfig(name, user) {
-  return axiosInstance.get("/master/config/" + name + user);
+export async function getConfig(name, user) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/config/${name}/${user}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getConfigId(id) {
-  return axiosInstance.get("/master/config/" + id);
+export async function getConfigId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/config/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getConfigList(size, number) {
-  return axiosInstance.get("/master/config/list" + size + number);
+export async function getConfigList(size, number) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/config/list/${size}/${number}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getReference(type) {
-  return axiosInstance.get("/master/reference/" + type);
+export async function getReference(type) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/reference/${type}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompdocA(tenantId, id) {
-  return axiosInstance.get("/master/compdoc/a/" + tenantId + id);
+export async function getCompdocA(tenantId, id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/compdoc/a/${tenantId}${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getCompdocId(id) {
-  return axiosInstance.get("/master/compdoc/bycompanyheaderid/" + id);
+export async function getCompdocId(id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/master/compdoc/bycompanyheaderid/${id}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+
+  return res;
 }
 
-export function getCompdoc(tenantId, id) {
-  return axiosInstance.get("/master/compdoc/" + tenantId + id);
+export async function getCompdoc(tenantId, id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/compdoc/${tenantId}/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getInviting(userId) {
-  return axiosInstance.get("/master/invitinguser/" + userId);
+export async function getInviting(userId) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/invitinguser/${userId}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getSalgradeById(type, id) {
-  return axiosInstance.get("/master/salgrade/byid/" + type + id);
+export async function getSalgradeById(type, id) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/salgrade/byid/${type}/${id}`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
 
-export function getSalgrade(type, nominal) {
-  return axiosInstance.get("/master/salgrade/byid/" + type + nominal);
+export async function getSalgrade(type, nominal) {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(
+    `/master/salgrade/byid/${type}/${nominal}`,
+    {
+      headers: {
+        "X-TenantID": 9999,
+        Authorization: `Bearer ${access_token}`,
+      },
+    }
+  );
+
+  return res;
 }
 
-export function getService() {
-  return axiosInstance.get("/master/service");
+export async function getService() {
+  const auth = await authLogin();
+
+  const access_token = await auth.data.access_token;
+
+  const res = await axiosInstance.get(`/master/service`, {
+    headers: {
+      "X-TenantID": 9999,
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+
+  return res;
 }
